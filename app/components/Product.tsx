@@ -4,17 +4,18 @@ import { ProductType } from  '@/type/ProductType'
 import Link from 'next/link'
 
 
-export default function Product({name, image, description, price, id} : ProductType) {
-            return (
+export default function Product({name, image, description, unit_amount, id, metadata} : ProductType) {
+        const { features } = metadata    
+    return (
                 //TODOs:  dynamic rendering of the product page - Product.tsx
-   <Link href={{pathname: `/product/${id}`, query: {name, image,price, description, id}}}>
+   <Link href={{pathname: `/product/${id}`, query: {name, image,unit_amount, description, id, features}}}>
           
 <ul>
         {/* In order to size the image as the current width  & height are only impacting 
             the resolution, we need to add a className in <image /> & then we change the pic size */}
             <li><Image src={image} width={800} height={800} alt={name}  className='object-cover w-160 h-70 rounded-lg'  /></li>
             <li className='font-medium py-0.5 text-gray-700'>Titre  : {name}</li>
-            <li className='text-sm decoration-from-font text-blue-700 '>Prix : {price && formatPrice(price as number)}</li>
+            <li className='text-sm decoration-from-font text-blue-700 '>Prix : {unit_amount && formatPrice(unit_amount as number)}</li>
         
 </ul>
 </Link>          

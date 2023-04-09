@@ -11,13 +11,15 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, { apiVersion:
           const productWithPrices = await Promise.all(
                       products.data.map(async (product) => {
                       const prices = await stripe.prices.list({product: product.id,})
+                      const features = product.metadata.features || "" // we use here the metadata to get the features of the product
                       return {
                         id: product.id,
                         name: product.name,
-                        price: prices.data[0].unit_amount,
+                        unit_amount: prices.data[0].unit_amount,  // we use here the unit_amount to get the price of the product
                         image: product.images[0],
                         currency: prices.data[0].currency,
                         description: product.description,
+                        metadata: {  features },
                   
                         // metadata: product.metadata,
                       }
