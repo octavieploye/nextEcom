@@ -7,7 +7,7 @@ import Link from 'next/link'
 export default function Product({name, image, description, price, id} : ProductType) {
             return (
                 //TODOs:  dynamic rendering of the product page - Product.tsx
-   
+   <Link href={`/product/${id}`}>
           
 <ul>
         {/* In order to size the image as the current width  & height are only impacting 
@@ -17,6 +17,6 @@ export default function Product({name, image, description, price, id} : ProductT
             <li className='text-sm decoration-from-font text-blue-700 '>Prix : {price && formatPrice(price as number)}</li>
         
 </ul>
-            
+</Link>          
     )
 }
