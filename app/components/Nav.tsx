@@ -5,12 +5,15 @@ import { Session } from "next-auth"
 import {signIn} from 'next-auth/react'
 import { signOut } from "next-auth/react"
 import Image from "next/image"
+import Link from "next/link"
 
 // This is a component that will be used in the layout.tsx file as to fetch the user
 export default function Nav({user} : Session) {
     return (
-        <nav className=" bg-pink-200 rounded-md flex justify-between items-center py-8">
-    <h1>This is a navbar</h1>
+        <nav className=" bg-pink-200 rounded-md flex justify-between items-center py-3 p-5">
+    <Link href='/'>
+    <h1 className="text-bold bg-pink-500 rounded-md text-white py-2 p-4">Home</h1>
+    </Link>
 
     <ul className=" flex items-center gap-12">
     

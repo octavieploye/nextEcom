@@ -5,6 +5,7 @@ import formatPrice from "@/Utility/PriceFormat"
 
 export default async function Product ({searchParams} : SearchParamsType) {
     
+    
     return (
         <div className="flex justify-between gap-24 p-12 text-gray-700-700">
 
@@ -18,8 +19,8 @@ export default async function Product ({searchParams} : SearchParamsType) {
 
                 <h1 className="text-2x1  py-2 ">{searchParams.name}</h1>
                     <h2 className="py-2">{searchParams.description}</h2>
+                    {/* TODO: Fix  metadata: { features: '' } String is empty - no error */}
                     <p>{searchParams.features}</p>
-                    console.log({searchParams.features})
 
                     <div className=" flex gap-2">
                             <p className="font-bold text-sm decoration-from-font text-blue-700 ">

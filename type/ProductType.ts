@@ -5,7 +5,7 @@ export type ProductType = {
     quantity?: number | 1;
     unit_amount: number | null;
     description: string | null;
-    metadata: MetadataType
+    metadata: MetadataType;
 
 }
 
