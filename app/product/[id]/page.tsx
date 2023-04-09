@@ -2,6 +2,7 @@ import Image from "next/image"
 import { SearchParamsType } from "@/type/SearchParamsType"
 import formatPrice from "@/Utility/PriceFormat"
 
+
 export default async function Product ({searchParams} : SearchParamsType) {
     
     return (
@@ -16,7 +17,9 @@ export default async function Product ({searchParams} : SearchParamsType) {
             <div className="font-medium text-gray-500">
 
                 <h1 className="text-2x1  py-2 ">{searchParams.name}</h1>
-                    <h2>{searchParams.description}</h2>
+                    <h2 className="py-2">{searchParams.description}</h2>
+                    <p>{searchParams.features}</p>
+                    console.log({searchParams.features})
 
                     <div className=" flex gap-2">
                             <p className="font-bold text-sm decoration-from-font text-blue-700 ">
