@@ -20,8 +20,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, { apiVersion:
                         currency: prices.data[0].currency,
                         description: product.description,
                         metadata: {  features },
-                  
-                        // metadata: product.metadata,
+                          
                       }
                 })
               )
