@@ -7,7 +7,7 @@ import Link from 'next/link'
 export default function Product({name, image, description, price, id} : ProductType) {
             return (
                 //TODOs:  dynamic rendering of the product page - Product.tsx
-   <Link href={`/product/${id}`}>
+   <Link href={{pathname: `/product/${id}`, query: {name, image,price, description, id}}}>
           
 <ul>
         {/* In order to size the image as the current width  & height are only impacting 

@@ -242,3 +242,50 @@ VI. Styling home page
                    <main className="grid grid-cols-fluid gap 16">
 
                    -> In Product now we need to resize the images using a className in <Image/>
+
+VII. Product Page
+
+  - We want to link our productsList to a Product description page(ProductCard).
+
+  -    Hence we need to import Link in the Product file then wrap the product info into the <Link> tag
+              <!-- <Link href=`/product/${id}`> --> for testing the routing
+              <!-- <Link href={{pathname: `/product/${id}`, query: {name, image,price, description, id}}}> --> Once we know it works
+
+  -    Then in order to link to the actual product we need to add the id in the product type and  product file:
+
+  -    Then Under APP folder We create a product folder and a [id] folder and We will then create a page.tsx folder in the [id] folder
+
+  For Testing We will add the below:
+<!-- 
+  export default async function Product (props) {
+    console.log(props)
+    return (
+        <div>
+            <div>
+
+            <h1>Product</h1>
+            <h2>Description</h2>
+            </div>
+         </div>   
+    )
+} -->
+
+Once we get it wsorking and we can see the params in the terminal and the productPage in the browser we can paste the below 
+  <!-- export default async function ProductCard({searchParams}) {
+   
+    return (
+        <div className="flex justify-between gap-24 p-12 text-gray-700">
+            {/* <Image 
+            src={searchParams.image} 
+            width={800} 
+            height={800} 
+            alt={searchParams.name}  
+             /> */}
+            <div>
+
+            <h1>{searchParams.name}</h1>
+            <p>description</p>
+        </div>
+            </div>
+    )
+} -->
