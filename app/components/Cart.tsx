@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useCartStore }from "@/store";
 import formatPrice from "@/Utility/PriceFormat"
+import { IoAddCircle, IoRemoveCircle } from "react-icons/io5"
 
 export default function Cart() {
     const cartStore = useCartStore();
@@ -18,7 +19,29 @@ export default function Cart() {
                         <Image className="rounded-md h24"  src={item.image} width={120} height={120} alt={item.name} />
                         <div>
                             <h2 className="mb-4 font-bold" >{item.name}</h2>
-                            <h2>Quantity: {item.quantity}</h2>
+                            {/* update quanity of a product */}
+                            <div className="flex gap-2">
+                                <h2>Quantity: {item.quantity}</h2>
+                                    <button onClick={() => 
+                                        cartStore.removeProduct({
+                                            id: item.name, 
+                                            quantity: item.quantity, 
+                                            name: item.name, 
+                                            image: item.image,
+                                            unit_amount: item.unit_amount,})} >
+                                        <IoRemoveCircle/>
+                                    </button>
+                                    <button onClick={() => 
+                                        cartStore.addProduct({
+                                            id: item.name, 
+                                            quantity: item.quantity, 
+                                            name: item.name, 
+                                            image: item.image,
+                                            unit_amount: item.unit_amount,})} >
+                                                
+                                        <IoAddCircle/>
+                                    </button>
+                            </div>
                             <p className="text-sm" >Price: {item.unit_amount && formatPrice(item.unit_amount)}  </p>
                         </div>
                         

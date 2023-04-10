@@ -40,11 +40,8 @@ export default function Nav({user} : Session) {
         {!user && (
             // We need to add a <div> here because we can't return two elements in next
              
-                <li className="h-8 px-4 px-4 text-sm 
+                <li className="h-8 px-4 text-sm 
                 text-pink-100 
-                transition-colors duration-150 
-                bg-pink-500 rounded-lg 
-                on-colors duration-150 
                 bg-pink-200 rounded-lg focus:shadow-outline 
                 hover:bg-pink-600">
                 
