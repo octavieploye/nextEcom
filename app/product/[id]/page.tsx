@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { SearchParamsType } from "@/type/SearchParamsType"
 import formatPrice from "@/Utility/PriceFormat"
+import AddCart from "./AddCart"
 
 
 export default async function Product ({searchParams} : SearchParamsType) {
@@ -26,10 +27,11 @@ export default async function Product ({searchParams} : SearchParamsType) {
                             <p className="font-bold text-sm decoration-from-font text-blue-700 ">
                             {searchParams.unit_amount && formatPrice(searchParams.unit_amount)}</p>
                     </div>
-
-                        <button 
+                    {/* Here we replaced the AddCart button by the function AddCart() we created in theAddCart.ysx file */}
+                    <AddCart  {...searchParams} />
+                        {/* <button 
                         className="my-12 text-white py-2 px-6 font-medium rounded-md bg-blue-900">
-                        Add to cart</button>
+                        Add to cart</button> */}
             </div>
         </div>   
     )

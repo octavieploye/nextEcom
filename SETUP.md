@@ -343,7 +343,30 @@ IX. Adding Products to Cart
 
           --> In the store.ts we want to add toggleCart
           --> Nav.tsx add onClick={() =>cartStore.toggleCart() } in the shoppingIcon <li>
+          --> -> In the store.ts we want to add toggleCart
+          → Then in the product/[id] folder we create a new file AddCart.tsx
 
+We import the useCartStore and we  create an Addcart function with type(data info we need)
+
+On the return we will add a fragment that will hold an Add to Cart button
+
+Then we will add the function we created inthe product.[id] →page.tsx file  : <AddCart  {...searchParams} />
+
+        -> We then create a new Type file under AddCartType.ts and update  AddCart.tsx file
+
+- We import AddCartType
+- Then se set the type
+
+In order to be able to add a product we need to add it in our cartState  in our Store.ts. 
+
+- We import the { AddCartType } then we can replace the cartItem and CartState with our newly created AddCartType
+- We create a type addProduct in the cartState then we create the setter for our new type addProduct:
+
+1- Check if the item already exists in the cart
+
+2- If the item already exists, update the quantity by 1
+
+3- Else keep everything the way it was,add the new item to the cart
 
 X. Hydration -mismatch Error - client-server
     REsolution: 
@@ -374,4 +397,8 @@ export default function Hydrate({children} : {children: ReactNode}) {
     </>
     )
 } -->
-        Then we go to  Layout.tsx:
+       Then we go to  Layout.tsx and import the hydrate function:
+
+import Hydrate from './components/hydrate’
+
+   --> Then we will wrap our code with within the body tag   <Hydrate>  </Hydrate>
