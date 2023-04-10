@@ -9,6 +9,7 @@ I. Installation
 - Install zustand 4.3.3
 - Install react-icons
 
+
 yarn add prisma ts-node @prisma/client
 
 - connect Prisma to the DB  
@@ -368,6 +369,11 @@ In order to be able to add a product we need to add it in our cartState  in our 
 
 3- Else keep everything the way it was,add the new item to the cart
 
+    - Finally we update the addCart.tsx file adding the Onclick button
+            OnClick={() => cartStore.addProduct({id, image, unit_amount, quantity, name})}
+
+
+
 X. Hydration -mismatch Error - client-server
     REsolution: 
     - create a component called hydrate.tsx
@@ -402,3 +408,24 @@ export default function Hydrate({children} : {children: ReactNode}) {
 import Hydrate from './components/hydrate’
 
    --> Then we will wrap our code with within the body tag   <Hydrate>  </Hydrate>
+
+
+
+XI. CartView
+
+# **cartView**
+
+We now want to create a cartView of the item added
+
+We export a default function Cart  then :
+
+- We first create an onClick that will toggle the cart then an onclick to stop the propagation of the event in a second div
+
+- Then we set a function that will map through the cartStore and cart to retrieve and render the items
+
+- We then create the checkout button
+
+XII. Adding and Removing Items in the cart
+
+
+  
