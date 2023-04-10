@@ -1,10 +1,12 @@
 I. Installation
 
 - Install node
-- create next-app
+- create next-app 13.2.4
 - Install tailwindcss
 - Access db railway or superbase and set an .ENV file with the DATABASE_URL
 - Install prisma 
+- Install zustand 4.3.3
+- Install react-icons
 
 yarn add prisma ts-node @prisma/client
 
@@ -289,3 +291,51 @@ Once we get it wsorking and we can see the params in the terminal and the produc
             </div>
     )
 } -->
+    
+    
+
+    VIII. State Managment With Zustand
+
+         Install zustand: yarn add zustand@4.3.3
+             --> We create a file in the root of the app called store.ts
+             --> we import:
+
+                        import { create } from "zustand";
+                        import { persist } from "zustand/middleware"; <-- import persist all the data in your local storage 
+
+                        we now set the type of data we want and we set the setter. 
+
+            --> To set the getter we will create a new component in the component folder called Cart.tsx
+
+                                        'use client';
+
+                                          import Image from "next/image";
+                                          import { useCartStore } from "@/store";
+
+                                          export default function Cart() {
+                                              const carStore = useCartStore();
+                                              console.log(carStore.isOpen)
+                                              return (
+                                                  <div>
+                                                      <h1>Cart</h1>
+                                                  </div>
+                                              )
+                                              
+                                          }
+
+            --> Then  In Nav.tsx we will:
+
+- import Cart  and { useCartStore }
+- we will add a const named cartStore to store the useCartStore()   in the NAv function.
+
+Then we will add {cartStore.isOpen && <*Cart* />} before  the </Nav> tag
+
+                      --> Then we install react-icons yarn add react-icons in order to install the icon on the page
+
+                      —> Then we import the cart we want (we can select it from the react-icon docs:
+
+
+
+Here we want AiFillShopping
+
+IX. Adding Products to Cart

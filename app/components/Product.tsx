@@ -8,8 +8,9 @@ export default function Product({name, image, description, unit_amount, id, meta
         const { features } = metadata    
     return (
                 //TODOs:  dynamic rendering of the product page - Product.tsx
+    
    <Link href={{pathname: `/product/${id}`, query: {name, image,unit_amount, description, id, features}}}>
-          
+        
 <div>
 
         {/* In order to size the image as the current width  & height are only impacting 
@@ -21,5 +22,6 @@ export default function Product({name, image, description, unit_amount, id, meta
 </div>
 
 </Link>          
+              
     )
 }
