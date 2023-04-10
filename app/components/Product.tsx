@@ -4,12 +4,12 @@ import { ProductType } from  '@/type/ProductType'
 import Link from 'next/link'
 
 
-export default function Product({name, image, description, unit_amount, id, metadata} : ProductType) {
+export default function Product({name, image, description, unit_amount, id, metadata, quantity} : ProductType) {
         const { features } = metadata    
     return (
                 //TODOs:  dynamic rendering of the product page - Product.tsx
     
-   <Link href={{pathname: `/product/${id}`, query: {name, image,unit_amount, description, id, features}}}>
+   <Link href={{pathname: `/product/${id}`, query: {name, quantity, image,unit_amount, description, id, features}}}>
         
 <div>
 
