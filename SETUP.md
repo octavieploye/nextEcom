@@ -1,4 +1,5 @@
 I. Installation
+**hydration error see XI**
 
 - Install node
 - create next-app 13.2.4
@@ -339,3 +340,38 @@ Then we will add {cartStore.isOpen && <*Cart* />} before  the </Nav> tag
 Here we want AiFillShopping
 
 IX. Adding Products to Cart
+
+          --> In the store.ts we want to add toggleCart
+          --> Nav.tsx add onClick={() =>cartStore.toggleCart() } in the shoppingIcon <li>
+
+
+X. Hydration -mismatch Error - client-server
+    REsolution: 
+    - create a component called hydrate.tsx
+    -  add 'use client' and import ReactNode,useEffect, useState from react
+    -  Then we create an hydrate function where we will pass the children that act as a wrapper of our code:
+
+<!-- 'use client'
+
+import exp from "constants"
+import { ReactNode,useEffect, useState } from "react"
+
+// "children act as a wrapper around the code to avoid any hydration error"
+export default function Hydrate({children} : {children: ReactNode}) {
+    const [isHydrated, setHydrated] = useState(false)
+
+    // Wait till next.js rehydration complete
+    useEffect(() => {
+        setHydrated(true)
+    }, [])
+
+    return(
+        // We then retun a fragment if hydrated is true, 
+        // then renderout all the children Otherwise renderout a <div> 
+        // we wre still loading
+    <> 
+    isHydrated ? <> children </> : <div>Loading...</div>
+    </>
+    )
+} -->
+        Then we go to  Layout.tsx:

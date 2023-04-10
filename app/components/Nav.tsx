@@ -5,6 +5,7 @@ import {signIn} from 'next-auth/react'
 import { signOut } from "next-auth/react"
 import Image from "next/image"
 import Link from "next/link"
+
 // We set the getter for the Cart component
 import Cart from "./Cart"
 import { useCartStore } from "@/store"
@@ -17,13 +18,20 @@ export default function Nav({user} : Session) {
     return (
         <nav className="flex
          justify-between items-center py-12">
+
+    {/* adding a home button */}
     <Link href='/'>
     <h1 className="text-bold bg-pink-500 rounded-md text-white py-2 p-4">Home</h1>
     </Link>
 
     <ul className=" flex items-center gap-12">
-         <li className=" flex items-center text-3xl relative cursor-pointer">
+            
+           
+        {/* Adding the shoping Icon & Toggle the cart */}
+         <li onClick={() =>cartStore.toggleCart() } className=" flex items-center text-3xl relative cursor-pointer">
             <AiFillShopping />
+
+            {/* Adding the number of item in the Cart */}
             <span className="bg-sky-800  text-white text-sm font-bold w-5 h-5 rounded-full absolute left-4 bottom-4 flex items-center justify-center ">
                 {cartStore.cart.length}
             </span>
