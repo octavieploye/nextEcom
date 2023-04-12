@@ -49,12 +49,14 @@ export default function Cart() {
                         
                     </div>
                 ))}
-
+                {/* When basket is not empty */}
                 {cartStore.cart.length > 0  && (
                 <button className="py-2 mt-4 bg-sky-700 text-white w-full rounded-md">
                     Checkout
                 </button>
                 )}
+
+                {/* When basket is empty -emptybasketView  */}
                 {!cartStore.cart.length && (
                     <div className="flex flex-col items-center gap-12 text-2x1 font-medium pt-56 opacity-75">
                     <h1>Uhhh Ohhhh...it's empty 🥹</h1>
