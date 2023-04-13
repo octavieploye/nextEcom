@@ -1,17 +1,43 @@
 I. Installation
-**hydration error see XI**
 
 Dependencies:
 - Install node
 - create next-app 13.2.4
 - Install tailwindcss
 - Access db railway or superbase and set an .ENV file with the DATABASE_URL
+- Install next-auth 
 - Install prisma 
 - Install zustand 4.3.3
 - Install react-icons
-- Install yarn add framer-motion
+- Install framer-motion
+  
+---------------------------------- Commands--------------------------------
+- yarn add node
+- yarn add next-app 13.2.4
+- yarn add prisma ts-node @prisma/client
+- yarn prisma migrate dev & yarn prisma generate 
+// To be run when creating or modifying the db//
+- yarn add next-auth @next-auth/prisma-adapter // authentication
+- openssl rand -base64 32   // generate a secret code/key
+- yarn dev   // runs the server/compiler
+- yarn add stripe
+- yarn add @stripe/stripe-js@1.46.0 (line 250)
+- yarn add zustand@4.3.3 (line 330)
+- yarn add framer-motion
+- yarn add @stripe/react-stripe-js@1.16.5 (line 494)
 
+=================ERRORS,BUGS & FIXES===========================================
+    - FOR NEXT VERSION 13.3 AND ABOVE: 
+For the newer version of next js ver13.3+ there is an active bug with use client where if you export a function with ‘export default function Nav(){}’ for example. It will throw an error. 
 
+Fix: change the function to ‘const Nav = () => {}
+Sorry I’m writing this on the phone
+Just use an arrow function instead and export at the bottom with export default Nav
+    
+     - HYDRATION ERROR FIX
+ - X. Hydration -mismatch Error - client-server (LINE 417)
+  
+================================================================================
 yarn add prisma ts-node @prisma/client
 
 - connect Prisma to the DB  
@@ -43,7 +69,7 @@ yarn add prisma ts-node @prisma/client
 
              Then we import the adapter as per the SETUP in next-auth doc above in the file next-auth we created above:
     
-    --> Then we need to create a ggogle sessionas a google provider
+    --> Then we need to create a ggogle session as a google provider
      
      https://console.cloud.google.com/getting-started?hl=fr
 
@@ -68,12 +94,14 @@ The "Authorized redirect URIs" used when creating the credentials must include y
 
      We will then need to create a .env.local file to add the above credentials
     
-    !!
+    !! **************** !!!!
          - We also need:
-         -               - Generate a secret key for nextauth: In the terminal we can RUN “  openssl rand -base64 32.  “
+         -               - Generate a secret key for nextauth: In the terminal we can RUN “  openssl rand -base64 32  “
          -               - Add a NEXTAUTH_SECRET key in the .env.local file as per example below:
          - NEXTAUTH_SECRET=D6Gfj9O9qyC1TnOYGFDJHGwA1KIdVPriYC/tGqlrZY+w=
+        And we need to add  the url:
 
+        - NEXTAUTH_URL=http://localhost:3000
 
 
      ================================
@@ -226,7 +254,7 @@ module.exports = nextConfig
 10- Then we can style the image rounding up and styling the signin button hence we need to signout first from the app
 
 IV. Add Admin/User Role
-
+            // TODO
 
 V. Fetch the data from Stripe (previously we created in the Stripe app a list of products)
 
@@ -442,7 +470,7 @@ XII. Adding and Removing Items in the cart
 
 # XIII. empty basket
 
-        TODO
+        TODO( bug/glitche not able to remove last item and duplicate item when adding)
 
 XIV. Adding Google fonts
         In Layout.jsx we import:
@@ -469,4 +497,22 @@ Then in the <body> we replace ‘mx-64’ by the below :
   {/* Checkout and Total */}
                 <p>Total:     { formatPrice (totalPrice)}</p>
 
-XVI. Framer motion
+XVI. Framer motion to XVIII. Responsive
+        // TODO 
+
+XIX. Stripe Checkout
+
+- yarn add @stripe/react-stripe-js@1.16.5
+- We create a Checkout components
+- add 'use client'
+
+- import { loadStripe, StripeElementsOptions } from "@stripe/stripe-js"
+- import { Elements } from "@stripe/react-stripe-js"
+- import { useCartStore } from "@/store"
+- import { useState,useEffect } from "react"
+
+        We create a Stripe Promise to pass the next stripe publishable key.  
+const stripePromise = loadStripe(process.env.NEXT_STRIPE_PUBLISHABLE_KEY!)
+        
+        Hence we will need to replace the Stripe_publishable_key by NEXT_STRIPE_PUBLISHABLE_KEY in the ENV>LOCAL file:
+

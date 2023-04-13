@@ -8,13 +8,14 @@ export default async function Product ({searchParams} : SearchParamsType) {
     
     
     return (
-        <div className="flex justify-between gap-24 p-12 text-gray-700-700">
+        <div className="flex flex-col 2xl:flex-row items-center justify-between gap-24 text-gray-700-700">
 
             <Image 
                 src={searchParams.image} 
                 width={500} 
                 height={500} 
                 alt={searchParams.name}  
+                // className="w-full"
              /> 
             <div className="font-medium text-gray-500">
 
