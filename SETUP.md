@@ -1,6 +1,7 @@
 I. Installation
 **hydration error see XI**
 
+Dependencies:
 - Install node
 - create next-app 13.2.4
 - Install tailwindcss
@@ -8,6 +9,7 @@ I. Installation
 - Install prisma 
 - Install zustand 4.3.3
 - Install react-icons
+- Install yarn add framer-motion
 
 
 yarn add prisma ts-node @prisma/client
@@ -62,9 +64,19 @@ The "Authorized redirect URIs" used when creating the credentials must include y
 
      Once Created we get (example):
      -  Client ID: 151479428562-svva8r69gpe3c5v0k0rvi4b55t5ae5bt.apps.googleusercontent.com
-     -  Secret code: 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
+     -  Secret code: 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
 
      We will then need to create a .env.local file to add the above credentials
+    
+    !!
+         - We also need:
+         -               - Generate a secret key for nextauth: In the terminal we can RUN “  openssl rand -base64 32.  “
+         -               - Add a NEXTAUTH_SECRET key in the .env.local file as per example below:
+         - NEXTAUTH_SECRET=D6Gfj9O9qyC1TnOYGFDJHGwA1KIdVPriYC/tGqlrZY+w=
+
+
+
+     ================================
 
      2- Fill the consent and validation
      ====================================
@@ -426,6 +438,35 @@ We export a default function Cart  then :
 - We then create the checkout button
 
 XII. Adding and Removing Items in the cart
+        TODO
 
+# XIII. empty basket
+
+        TODO
+
+XIV. Adding Google fonts
+        In Layout.jsx we import:
+
+import { Roboto, Lobster_Two } from 'next/font/google’
+
+Then we create the font family: 
+
+```tsx
+const roboto = Roboto({weight: ['400', '500', '700'], subsets: ['latin']})
+```
+
+Then in the <body> we replace ‘mx-64’ by the below :
+
+<body className={`mx-64 ${roboto.className}`}>
 
   
+  XV.  Total Price Format
+
+  In cart.tsx we will create the accumulated methode in a constant called totalPrice that we will pass during the rendering
+
+  We will render it  in cart.tsx   scrolling down the checkout tag and we will pass through 
+
+  {/* Checkout and Total */}
+                <p>Total:     { formatPrice (totalPrice)}</p>
+
+XVI. Framer motion

@@ -3,6 +3,13 @@ import './globals.css'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/pages/api/auth/[...nextauth]'
 import Hydrate from './components/hydrate'
+import { Roboto, Lobster_Two, Satisfy } from 'next/font/google'
+
+
+// Define the main font family
+
+const roboto = Roboto({weight: ['400', '500', '700'], subsets: ['latin']})
+
 
 export const metadata = {
   title: 'Create Next App',
@@ -19,8 +26,8 @@ export default async function RootLayout({
   console.log(session)
   return (
     <html lang="en">
-      <body className='mx-64'>
-        
+      <body className={`mx-64 ${roboto.className}`}>
+    
         <Hydrate>
           <Nav user={session?.user} expires={session?.expires as string} />
           {children}

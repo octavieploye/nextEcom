@@ -8,6 +8,7 @@ const prisma = new PrismaClient()
 
 export const authOptions = {
   adapter: PrismaAdapter(prisma),
+  secret: process.env.NEXTAUTH_SECRET,
   providers: [
     GoogleProvider({
         // Typescript complains about the following two lines either it is a string or undefined
