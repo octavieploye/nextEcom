@@ -1,12 +1,13 @@
-import NextAuth from "next-auth"
+import NextAuth, { NextAuthOptions } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import { PrismaClient } from "@prisma/client"
 import Stripe from "stripe"
 
+
 const prisma = new PrismaClient()
 
-export const authOptions = {
+export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   secret: process.env.NEXTAUTH_SECRET,
   providers: [
@@ -31,23 +32,31 @@ export const authOptions = {
         // To do this we need to have the user's email and name
         //To avoid the warning message as user is a string or undefined we will use the if statement
         if(user.name && user.email) {
-        const costomer = await stripe.customers.create({
-            email: user.email,
-            name:user.name
-        })
-    
-        // Update the user prisma in the database with the stripeCustomerId
-        await prisma.user.update({
-            where: {
-               id: user.id
-            },
-            data: {
-                stripeCustomerId: costomer.id
-            },
-        })
-                                 }
+                const costomer = await stripe.customers.create({
+                    email: user.email || undefined,
+                    name:user.name    || undefined,
+                })
+            
+                // Update the user prisma in the database with the stripeCustomerId
+                await prisma.user.update({
+                    where: {
+                      id: user.id
+                    },
+                    data: {
+                        stripeCustomerId: costomer.id
+                    },
+                })
+          }
+      },  
+  },
 
-    },  
+  // This is the function that will be called when the user is logged in
+  // we fetched the ID and the StripeCustomerID which we will need to checkout the order
+  callbacks: {
+    async session({session, token,user}) {
+      session.user = user
+      return session
+    },
   },
 }
 
