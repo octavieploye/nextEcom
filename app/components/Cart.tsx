@@ -83,6 +83,7 @@ export default function Cart() {
                 <motion.div layout>
                 <p  className="text-sky-800 text-bold">Total:     { formatPrice (totalPrice)}</p>
                 {/* When basket is not empty */}
+            {/* SETTING THE CHECKOUT PAGE ONCLICK*/}
                     <button onClick={() => cartStore.setCheckout('checkout')} 
                     className="py-2 mt-4 bg-sky-700 text-white w-full rounded-md">
                         Checkout
