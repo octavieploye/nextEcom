@@ -28,6 +28,17 @@ export default function Checkout() {
                         payment_intent_id: cartStore.paymentIntent,
                     }),
                 })
+                // IF THE USER IS NOT LOGGED IN AT THE CHECKOUT, WE WANT THE USER TO SIGNIN
+                .then((res) => {
+                    console.log(res)
+                    // set the client secret and the payment intent associated with the order
+                })
             
     },[])
+
+    return (
+        <div>
+            <h1>Here is the checkout PAGE</h1>
+        </div>
+    )
 }

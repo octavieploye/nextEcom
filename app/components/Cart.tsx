@@ -6,6 +6,7 @@ import formatPrice from "@/Utility/PriceFormat";
 import {IoAddCircle, IoRemoveCircle} from 'react-icons/io5';
 import basket from "@/public/basket.png"
 import { motion, AnimatePresence } from "framer-motion"
+import Checkout from "./Checkout";
 
 export default function Cart() {
     const cartStore = useCartStore();
@@ -34,6 +35,8 @@ export default function Cart() {
                  className="bg-gray-100 absolute right-0 top-0 w-full lg:w-2/5 p-12 overflow-y-scroll text-gray-500">
                     <button onClick={() => cartStore.toggleCart()} className="text-sm font-bold pb-12"> Back to Store ☑️ </button>
                 {/* <h1>Here's your shopping List</h1> */}
+                { cartStore.onCheckout === 'cart' && (
+                    <>
                 {cartStore.cart.map((item) => (
                     <motion.div layout key={item.id}   className="flex py-4 gap-4">
                         <Image
@@ -73,17 +76,23 @@ export default function Cart() {
                         </motion.div>
                     </motion.div>
                 ))}
+                </>
+                )}
                     {/* Checkout and Total */}
                     {cartStore.cart.length > 0  && (
                 <motion.div layout>
                 <p  className="text-sky-800 text-bold">Total:     { formatPrice (totalPrice)}</p>
                 {/* When basket is not empty */}
-                    <button className="py-2 mt-4 bg-sky-700 text-white w-full rounded-md">
+                    <button onClick={() => cartStore.setCheckout('checkout')} 
+                    className="py-2 mt-4 bg-sky-700 text-white w-full rounded-md">
                         Checkout
                     </button>
                     
                 </motion.div>
                     )}
+            {/* CHECKOUT FORM */}
+            {cartStore.onCheckout === 'checkout' && <Checkout />}
+
                 {/* Animate the cart when the cart is empty */}
                 <AnimatePresence>
                     {/* When basket is empty -emptybasketView  */}
