@@ -500,10 +500,10 @@ Then in the <body> we replace ‘mx-64’ by the below :
 XVI. Framer motion to XVIII. Responsive
         // TODO 
 
-XIX. Stripe Checkout
+XIX. Stripe Checkout - Part 1
 
 - yarn add @stripe/react-stripe-js@1.16.5
-- We create a Checkout components
+- We create a Checkout components  ****
 - add 'use client'
 
 - import { loadStripe, StripeElementsOptions } from "@stripe/stripe-js"
@@ -514,5 +514,7 @@ XIX. Stripe Checkout
         We create a Stripe Promise to pass the next stripe publishable key.  
 const stripePromise = loadStripe(process.env.NEXT_STRIPE_PUBLISHABLE_KEY!)
         
-        Hence we will need to replace the Stripe_publishable_key by NEXT_STRIPE_PUBLISHABLE_KEY in the ENV>LOCAL file:
+        Hence we will need to replace the Stripe_publishable_key by NEXT_STRIPE_PUBLISHABLE_KEY in the ENV>LOCAL file
+
+-->  Then we create the export function called Checkout using useState and useEffect to fetch the ("api/create-Payment-intent' api with method ‘POST’ and passing the body as JSON stringify of the items from the cartStore and the payment_intent_id
 
