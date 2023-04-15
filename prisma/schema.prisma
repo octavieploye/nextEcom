@@ -64,6 +64,7 @@ model Order {
   userId String
   amount Float
   status String
+  currency String
   createDate DateTime @default(now())
   paymentIntentID String? @unique
   products Product[] 

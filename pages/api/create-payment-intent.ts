@@ -36,6 +36,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
      * 5. payment_intent_id = empty pairs of Strings initially
      */
     const {items, payment_intent_id} = req.body;
+    console.log(items, payment_intent_id)
 
     // CREATE THE ORDER DATA 
 
@@ -54,8 +55,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
          products: {
             create: items.map((item) => ({
                 name: item.name,
-                description: item.description,
-                unit_amount: item.unit_amount,
+                description: item.description || null,
+                // parseFloat to make sure it is not converted to a string
+                unit_amount:  parseFloat(item.unit_amount),
                 image: item.image,
                 quantity: item.quantity,
             }))
@@ -101,8 +103,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     // ADD THE NEW PRODUCTS IN THE ORDER
                         create: items.map((item) => ({
                             name: item.name,
-                            description: item.description,
-                            unit_amount: item.unit_amount,
+                            description: item.description || null,
+                            unit_amount: parseFloat(item.unit_amount),
                             image: item.image,
                             quantity: item.quantity,
                         })),
@@ -131,14 +133,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const newOrder = await prisma.order.create({
             data: orderData,
         })
+        /**
+         * 1.THEN WE SEND BACK PAYMENTINTENTID OVER TO THE FRONTEND CODE TO SAVE IT IN THE STATE
+         * 2.THIS ALLOW THE USER TO SAVE HIS CART AND COME BACK LATER TO PAY FOR IT
+         * 3.ONCE THE PAYMENT INTENT IS CREATED WE WILL BE RUNNING THE IF STATEMENT ABOVE
+         * 3. WE ALSO SEND BACK THE ORDER ID TO THE FRONTEND CODE TO USE IT FOR THE ORDER CONFIRMATION PAGE
+         */
+        res.status(200).json({paymentIntent})
     }
-    /**
-     * 1.THEN WE SEND BACK PAYMENTINTENTID OVER TO THE FRONTEND CODE TO SAVE IT IN THE STATE
-     * 2.THIS ALLOW THE USER TO SAVE HIS CART AND COME BACK LATER TO PAY FOR IT
-     * 3.ONCE THE PAYMENT INTENT IS CREATED WE WILL BE RUNNING THE IF STATEMENT ABOVE
-     * 3. WE ALSO SEND BACK THE ORDER ID TO THE FRONTEND CODE TO USE IT FOR THE ORDER CONFIRMATION PAGE
-     */
-    res.status(200).json({payment_intent_id})
-    return
-    // DATA NECESSARY FOR THE ORDER
+    
 }

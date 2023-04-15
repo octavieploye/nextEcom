@@ -42,6 +42,8 @@ export default function Checkout() {
                 // WE HAVE ACCESS TO ACTUAL DATA FROM THE RESPONSE
                 }).then((data) => {
                     console.log(data)
+                    setClientSecret(data.paymentIntent.client_secret)
+                    cartStore.setPaymentIntent(data.paymentIntent.id)
                 })
             
     },[])
