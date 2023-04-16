@@ -22,7 +22,14 @@ export default function Nav({user} : Session) {
 
                 {/* adding a home button */}
                 <Link href='/'>
-                <h1 className="text-bold bg-pink-500 rounded-md text-white py-2 p-4">Home</h1>
+                <h1 className="text-bold h-8 px-4 text-sm text-center flex justify-center py-1
+                transition-colors duration-150 
+                bg-blue-800
+                on-colors duration-150 
+                hover:bg-pink-500 
+                focus:shadow-outline
+                rounded-lg
+                text-white">Home</h1>
                 </Link>
 
     <ul className=" flex items-center gap-12">
@@ -49,10 +56,12 @@ export default function Nav({user} : Session) {
         {!user && (
             // We need to add a <div> here because we can't return two elements in next
              
-                <li className="h-8 px-4 text-sm 
+                <li className="h-8 px-4 text-sm text-center flex justify-center
                 text-pink-100 
-                bg-pink-200 rounded-lg focus:shadow-outline 
-                hover:bg-pink-600">
+                transition-colors duration-150 
+                bg-blue-800 rounded-lg focus:shadow-outline 
+                on-colors duration-150 
+                hover:bg-pink-500">
                 
                     <button onClick={() => signIn()}>Sign In</button>
                 </li>
@@ -64,20 +73,20 @@ export default function Nav({user} : Session) {
         {/* {Here we are checking if the user is signed in} */}
         {user && (
             // We need to add a <div> or Fragment <> here because we can't return two elements in next
-            <div>
+            <div className="flex gap-2">
                       
                 <li className="inline-block py-2 p-2"> <Image src={user?.image as string } width={36} height={36} alt={user.name as string} className="rounded-full "/></li>
-                {/* <li >
+                <li >
                     <button onClick={() => signOut()} 
-                    className="
+                    className=" ml-4
                     h-8 px-2 m-2 text-sm 
                     text-pink-100 
                     transition-colors duration-150 
                     bg-pink-500 rounded-lg 
                     on-colors duration-150 
-                    bg-pink-200 rounded-lg focus:shadow-outline 
-                    hover:bg-pink-600">Sign Out</button>
-                </li> */}
+                    bg-blue-800 rounded-lg focus:shadow-outline 
+                    hover:bg-pink-500">Sign Out</button>
+                </li>
             </div>
             )}
     </ul>

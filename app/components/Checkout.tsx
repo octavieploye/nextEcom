@@ -5,6 +5,7 @@ import { Elements } from "@stripe/react-stripe-js"
 import { useCartStore } from "@/store"
 import { useState,useEffect } from "react"
 import { useRouter } from "next/navigation"
+import  CheckoutForm  from "./CheckoutForm"
 
 // We add the ! to the end of the env variable to tell TypeScript that we know it will be there
 // We ned to add NEXT_OUBLIC TO STRIPE_PUBLISHABLE_KEY because we are using the env variable in the front-end(client-side)
@@ -47,10 +48,25 @@ export default function Checkout() {
                 })
             
     },[])
+// We pass the Stripe Elements options to the Elements component
+        const options: StripeElementsOptions = {
+            clientSecret,
+            appearance: {
+                theme: "stripe",
+                labels: "floating"
+            }
+        }
 
     return (
         <div>
-            <h1>Here is the checkout PAGE</h1>
+            {clientSecret && (
+                <div>
+{/*  We can check stripe docs elements in Google */}
+                    <Elements options={options} stripe={stripePromise}>
+                        <CheckoutForm clientSecret={clientSecret}  />
+                    </Elements>
+                </div>
+            )}
         </div>
     )
 }
