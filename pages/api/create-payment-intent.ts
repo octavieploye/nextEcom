@@ -81,7 +81,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 payment_intent_id,
                 // WE UPDATE TO THE NEW VALUE
                 { amount: calculateOrderAmount(items) }
-            )
+                )
+                console.log("we got an updated intent", updated_intent)
+
             // Fetctch order with the product id
             const order_exist = await prisma.order.findFirst({
                 where: {paymentIntentID: payment_intent_id},
@@ -111,6 +113,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     },
                 },
             })
+            console.log("we got an updated order", updated_order)
             res.status(200).json({message: "Order updated"})
             return;
         }

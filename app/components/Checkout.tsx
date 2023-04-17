@@ -7,16 +7,15 @@ import { useState,useEffect } from "react"
 import { useRouter } from "next/navigation"
 import  CheckoutForm  from "./CheckoutForm"
 
-// We add the ! to the end of the env variable to tell TypeScript that we know it will be there
-// We ned to add NEXT_OUBLIC TO STRIPE_PUBLISHABLE_KEY because we are using the env variable in the front-end(client-side)
+// NEXT_PUBLIC TO STRIPE_PUBLISHABLE_KEY because we are using the env variable in the front-end(client-side)
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
 
 export default function Checkout() {
     const cartStore = useCartStore()
     const router = useRouter()
-    // WE NEED TO CREATE A STATE TO STORE THE CLIENT SECRET as thte customer will need a client secret
+    // WE NEED TO CREATE A STATE TO STORE THE CLIENT SECRET as the customer will need a client secret
     const [clientSecret, setClientSecret] = useState("")
-
+// TODO: PROMISE client_secret is undefined error
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads up
         // EVERY PAYMENT AS A PAYMENT INTENT ID ASSOCIATED WITH IT. IF WE DON'T DO THIS WILL BE CREATING A NEW ORDER AND A NEW ORDER ID
@@ -41,13 +40,21 @@ export default function Checkout() {
                     return res.json()
 
                 // WE HAVE ACCESS TO ACTUAL DATA FROM THE RESPONSE
+    //TODO: PROMISE ERROR - Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'client_secret')
                 }).then((data) => {
                     console.log(data)
+                    
                     setClientSecret(data.paymentIntent.client_secret)
                     cartStore.setPaymentIntent(data.paymentIntent.id)
+                    
+                        console.error('Error: data.paymentIntent is undefined')
+                   
+                }) .catch((err) => {
+                    console.log('Error creating Payment Intent', setClientSecret ,err)
                 })
             
     },[])
+  
 // We pass the Stripe Elements options to the Elements component
         const options: StripeElementsOptions = {
             clientSecret,
@@ -56,7 +63,6 @@ export default function Checkout() {
                 labels: "floating"
             }
         }
-
     return (
         <div>
             {clientSecret && (

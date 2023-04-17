@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";  // <-- import persist all the data in your local storage 
 import { AddCartType } from "./type/AddCartType";
 
+//This file: store.ts is a zustand requirement as per Documentation
 
 type CartState = {
     isOpen: boolean;

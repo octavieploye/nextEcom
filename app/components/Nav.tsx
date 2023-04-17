@@ -23,7 +23,7 @@ export default function Nav({user} : Session) {
                 {/* adding a home button */}
                 <Link href='/'>
                 <h1 className="text-bold h-8 px-4 text-sm text-center flex justify-center py-1
-                transition-colors duration-150 
+                transition-colors 
                 bg-blue-800
                 on-colors duration-150 
                 hover:bg-pink-500 
@@ -58,7 +58,7 @@ export default function Nav({user} : Session) {
              
                 <li className="h-8 px-4 text-sm text-center flex justify-center
                 text-pink-100 
-                transition-colors duration-150 
+                transition-colors 
                 bg-blue-800 rounded-lg focus:shadow-outline 
                 on-colors duration-150 
                 hover:bg-pink-500">
@@ -81,8 +81,7 @@ export default function Nav({user} : Session) {
                     className=" ml-4
                     h-8 px-2 m-2 text-sm 
                     text-pink-100 
-                    transition-colors duration-150 
-                    bg-pink-500 rounded-lg 
+                    transition-colors 
                     on-colors duration-150 
                     bg-blue-800 rounded-lg focus:shadow-outline 
                     hover:bg-pink-500">Sign Out</button>

@@ -6,7 +6,10 @@ import formatPrice from "@/Utility/PriceFormat"
 import { useCartStore } from "@/store"
 
 
-export default function CheckoutForm({clientSecret}: {clientSecret: string}) {
+
+export default function CheckoutForm({
+    clientSecret,
+}: {clientSecret: string}) {
 
     const stripe = useStripe()
     const elements = useElements()
