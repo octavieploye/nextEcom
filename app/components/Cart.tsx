@@ -7,6 +7,7 @@ import {IoAddCircle, IoRemoveCircle} from 'react-icons/io5';
 import basket from "@/public/basket.png"
 import { motion, AnimatePresence } from "framer-motion"
 import Checkout from "./Checkout";
+import OrderConfirmed from "./OderConfirmed";
 
 export default function Cart() {
     const cartStore = useCartStore();
@@ -103,6 +104,7 @@ export default function Cart() {
                     ) : null}
             {/* CHECKOUT FORM */}
             {cartStore.onCheckout === 'checkout' && <Checkout />}
+            {cartStore.onCheckout === 'success' && <OrderConfirmed />}
 
                 {/* Animate the cart when the cart is empty */}
                 <AnimatePresence>
