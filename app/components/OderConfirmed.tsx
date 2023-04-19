@@ -13,6 +13,14 @@ export default function OrderConfirmed() {
     cartStore.setPaymentIntent('')
     cartStore.clearCart()
    },[])
+
+//    handle checkout order
+    const handleCheckoutOrder = () => {
+        setTimeout(() => {
+            cartStore.setCheckout('cart')
+        }, 1000)
+        cartStore.toggleCart()
+    }
  
     return (
         <motion.div  className='flex items-center justify-center my-12'  initial={{ scale: 0.5, opacity: 0}}  animate={{scale: 1, opacity: 1}} >
@@ -22,12 +30,8 @@ export default function OrderConfirmed() {
                 <Image src={cool} className='py-8 rounded-full' alt='cool gorilla with headphones'/>
                     <div className='flex items-center justify-center gap-12' >
                       <Link href={"/dashboard"}>
-                      <button 
-                      onClick={() => {
-                        cartStore.setCheckout('cart'),
-                        cartStore.toggleCart()
-                      }}
-                      className='font-medium'>Check your Order</button>
+                        {/* HANDLE CHECKOUT ORDER */}
+                      <button onClick={handleCheckoutOrder} className='font-medium'>Check your Order</button>
                       </Link>
                
                     </div>

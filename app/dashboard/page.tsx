@@ -1,3 +1,6 @@
+
+// Check your order page
+
 export default function Dashboard() {
     return (
         <div>
