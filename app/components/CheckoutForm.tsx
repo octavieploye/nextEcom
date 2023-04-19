@@ -67,7 +67,7 @@ useEffect(() => {
                             if(!result.error){
                     //We SET the checkout to success -  Reference to the store.ts we have onCheckout: "cart". 
                     //Here we will have a "Success" component
-                                cartStore.setCheckout("Success")
+                                cartStore.setCheckout("success")
                                 console.log('Payment Successful')
                             }
                             setIsLoading(false)

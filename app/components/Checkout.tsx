@@ -47,10 +47,10 @@ export default function Checkout() {
                     setClientSecret(data.paymentIntent.client_secret)
                     cartStore.setPaymentIntent(data.paymentIntent.id)
                     
-                        console.error('Error: data.paymentIntent is undefined')
+                        // console.error('Error: data.paymentIntent is undefined')
                    
                 }) .catch((err) => {
-                    console.log('Error creating Payment Intent', setClientSecret ,err)
+                    console.log(err)
                 })
             
     },[])

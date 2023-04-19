@@ -2,7 +2,7 @@ import Nav from './components/Nav'
 import './globals.css'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/pages/api/auth/[...nextauth]'
-import Hydrate from './components/hydrate'
+import Hydrate from './components/Hydrate'
 import { Roboto, Lobster_Two, Satisfy } from 'next/font/google'
 
 

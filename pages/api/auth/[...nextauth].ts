@@ -17,6 +17,13 @@ export const authOptions: NextAuthOptions = {
         // So we are using the as string to tell Typescript that we are sure about the values
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+      authorization: {
+        params: {
+          prompt: "consent",
+          access_type: "offline",
+          response_type: "code"
+        }
+      }
     }),
     //Add more providers here
   ],

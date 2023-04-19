@@ -1,4 +1,4 @@
-import { authOptions } from '@/pages/api/auth/[...nextauth]';
+import { authOptions} from "./auth/[...nextauth]"
 import Stripe from "stripe";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth";
@@ -71,78 +71,60 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
      * 2. If the payment_intent_id is empty - we go directly to the ELSE statement to create a new order
      */
 
-    if(payment_intent_id) {
-        const current_intent = await stripe.paymentIntents.retrieve(payment_intent_id);
 
-        // IF THE CURRENT_INTENT EXIST- UPDATE THE INTENT WITH THE NEW VALUE THAT WE HAVE IN OUR CART(IF THE USER MODIFIES ITS CART)
-        if(current_intent) {
-            const updated_intent = await stripe.paymentIntents.update(
-                // WE CHECK WHICH PAYMENT ID TO UPDATE
-                payment_intent_id,
-                // WE UPDATE TO THE NEW VALUE
-                { amount: calculateOrderAmount(items) }
+            //Check if the payment intent exists just update the order
+            if (payment_intent_id) {
+                const current_intent = await stripe.paymentIntents.retrieve(
+                payment_intent_id
                 )
-                console.log("we got an updated intent", updated_intent)
-
-            // Fetctch order with the product id
-            const order_exist = await prisma.order.findFirst({
-                where: {paymentIntentID: payment_intent_id},
-                include: {products: true}
-            })
-            // if the order does not exist
-            if(!order_exist) {
-                res.status(400).json({message: "Invalid Payment Intent"})
-                return;
-            }
-            // Update existing Order AND PUSH THE NEW PRODUCTS IN THE ORDER
-            const updated_order = await prisma.order.update({
-                where: {id: order_exist.id},
-                data: {
-                    amount: calculateOrderAmount(items),
-                    products: {
-                    // DELETE ALL THE PRODUCTS IN THE ORDER
+                if (current_intent) {
+                const updated_intent = await stripe.paymentIntents.update(
+                    payment_intent_id,
+                    { amount: calculateOrderAmount(items) }
+                )
+                //Fetch order with product ids
+                const [existing_order, updated_order] = await Promise.all([
+                    prisma.order.findFirst({
+                    where: { paymentIntentID: updated_intent.id },
+                    include: { products: true },
+                    }),
+                    prisma.order.update({
+                    where: { paymentIntentID: updated_intent.id },
+                    data: {
+                        amount: calculateOrderAmount(items),
+                        products: {
                         deleteMany: {},
-                    // ADD THE NEW PRODUCTS IN THE ORDER
                         create: items.map((item) => ({
                             name: item.name,
                             description: item.description || null,
                             unit_amount: parseFloat(item.unit_amount),
                             image: item.image,
                             quantity: item.quantity,
-                        })),
-                    },
-                },
-            })
-            console.log("we got an updated order", updated_order)
-            res.status(200).json({message: "Order updated"})
-            return;
-        }
-    } else {
-        // IF NO PAYMENT_INTENT_ID EXIST WE CREATE A PAYMENT INTENT
-        /**
-         * 1. We create a STRIPE payment intent ID with the amount that we have in our cart
-         */
-        
-        const paymentIntent = await stripe.paymentIntents.create({
+              })),
+            },
+          },
+        }),
+      ])
+
+            if (!existing_order) {
+                res.status(400).json({ message: "Invalid Payment Intent" })
+            }
+            res.status(200).json({ paymentIntent: updated_intent })
+            return
+            }
+        } else {
+            //Create a new order with prisma
+            const paymentIntent = await stripe.paymentIntents.create({
             amount: calculateOrderAmount(items),
-            currency: "eur",
+            currency: "usd",
             automatic_payment_methods: { enabled: true },
-        })
-        // CREATE A NEW ORDER WITH PRISMA
-        /**
-         * 2. We create a new order DATABASE IN PRISMA THAT WIL BE MARK AS 'PENDING
-         */
-        orderData.paymentIntentID = paymentIntent.id;
-        const newOrder = await prisma.order.create({
+            })
+
+            orderData.paymentIntentID = paymentIntent.id
+            const newOrder = await prisma.order.create({
             data: orderData,
-        })
-        /**
-         * 1.THEN WE SEND BACK PAYMENTINTENTID OVER TO THE FRONTEND CODE TO SAVE IT IN THE STATE
-         * 2.THIS ALLOW THE USER TO SAVE HIS CART AND COME BACK LATER TO PAY FOR IT
-         * 3.ONCE THE PAYMENT INTENT IS CREATED WE WILL BE RUNNING THE IF STATEMENT ABOVE
-         * 3. WE ALSO SEND BACK THE ORDER ID TO THE FRONTEND CODE TO USE IT FOR THE ORDER CONFIRMATION PAGE
-         */
-        res.status(200).json({paymentIntent})
-    }
-    
+            })
+            res.status(200).json({ paymentIntent })
+  }
 }
+
