@@ -11,6 +11,7 @@ export default function OrderConfirmed() {
    const cartStore = useCartStore()
    useEffect(() => {
     cartStore.setPaymentIntent('')
+    cartStore.clearCart()
    },[])
  
     return (
@@ -21,14 +22,14 @@ export default function OrderConfirmed() {
                 <Image src={cool} className='py-8 rounded-full' alt='cool gorilla with headphones'/>
                     <div className='flex items-center justify-center gap-12' >
                       <Link href={"/dashboard"}>
-                      <button className='font-medium'>Check your Order</button>
+                      <button 
+                      onClick={() => {
+                        cartStore.setCheckout('cart'),
+                        cartStore.toggleCart()
+                      }}
+                      className='font-medium'>Check your Order</button>
                       </Link>
-                      <button onClick={() => {
-                            cartStore.setCheckout('cart')
-                            cartStore.toggleCart()
-                      }}>
-                            Continue Shopping
-                      </button>
+               
                     </div>
             </div>
         </motion.div>

@@ -109,7 +109,7 @@ export default function Cart() {
                 {/* Animate the cart when the cart is empty */}
                 <AnimatePresence>
                     {/* When basket is empty -emptybasketView  */}
-                    {!cartStore.cart.length &&(
+                    {!cartStore.cart.length && cartStore.onCheckout === 'cart' &&(
                         <motion.div
                         animate={{scale:1, rotateZ: 0, opacity:0.75}}
                         initial={{  scale:0.5, rotateZ: -10, opacity:0}}
