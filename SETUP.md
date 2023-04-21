@@ -10,7 +10,10 @@ Dependencies:
 - Install zustand 4.3.3
 - Install react-icons
 - Install framer-motion
-  
+- Install Stripe webHook via Stripe CLI -> https://github.com/stripe/stripe-cli OR
+  https://stripe.com/docs/stripe-cli
+- Install micro
+
 ---------------------------------- Commands--------------------------------
 - yarn add node
 - yarn add next-app 13.2.4
@@ -25,6 +28,7 @@ Dependencies:
 - yarn add zustand@4.3.3 (line 330)
 - yarn add framer-motion
 - yarn add @stripe/react-stripe-js@1.16.5 (line 494)
+- yarn add micro
 
 =================ERRORS,BUGS & FIXES===========================================
     - FOR NEXT VERSION 13.3 AND ABOVE: 
