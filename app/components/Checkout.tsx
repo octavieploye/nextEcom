@@ -15,7 +15,7 @@ export default function Checkout() {
     const router = useRouter()
     // WE NEED TO CREATE A STATE TO STORE THE CLIENT SECRET as the customer will need a client secret
     const [clientSecret, setClientSecret] = useState("")
-// TODO: PROMISE client_secret is undefined error
+
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads up
         // EVERY PAYMENT AS A PAYMENT INTENT ID ASSOCIATED WITH IT. IF WE DON'T DO THIS WILL BE CREATING A NEW ORDER AND A NEW ORDER ID
@@ -28,8 +28,10 @@ export default function Checkout() {
                     body: JSON.stringify({
                         items: cartStore.cart,
                         payment_intent_id: cartStore.paymentIntent,
+                        
                     }),
                 })
+               
                 // IF THE USER IS NOT LOGGED IN AT THE CHECKOUT, WE WANT THE USER TO SIGNIN
                 .then((res) => {
                     if(res.status === 403){
@@ -40,12 +42,13 @@ export default function Checkout() {
                     return res.json()
 
                 // WE HAVE ACCESS TO ACTUAL DATA FROM THE RESPONSE
-    //TODO: PROMISE ERROR - Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'client_secret')
+    
                 }).then((data) => {
                     console.log(data)
                     
                     setClientSecret(data.paymentIntent.client_secret)
                     cartStore.setPaymentIntent(data.paymentIntent.id)
+                    
                     
                         // console.error('Error: data.paymentIntent is undefined')
                    
