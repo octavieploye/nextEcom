@@ -22,7 +22,7 @@ const prisma = new PrismaClient();
 export default async function handler (req:NextApiRequest, res:NextApiResponse) {
     const buf = await buffer(req);
     // Stripe will be giving a signature to verify the event
-    const sig = req.headers["stripe-signature"] as string;
+    const sig = req.headers["stripe-signature"]
 
     if(!sig) {
         res.status(400).send("No signature found");
@@ -31,6 +31,7 @@ export default async function handler (req:NextApiRequest, res:NextApiResponse) 
     // Construct the event
     let event: Stripe.Event;
 
+//Handle different types of events
 
 
     try {
@@ -53,9 +54,11 @@ export default async function handler (req:NextApiRequest, res:NextApiResponse) 
             if( typeof charge.payment_intent === "string") {
                 const order = await prisma.order.update({
                     where: { paymentIntentID: charge.payment_intent },
-                    data: { status: "complete"}      
+                    // update the db order status from 'pending' to 'complete'
+                    data: { status: "complete"},   
                 })
                 console.log(`Order ${order.id} updated successfully`)
+            
             }
                 break
         default:
@@ -63,4 +66,3 @@ export default async function handler (req:NextApiRequest, res:NextApiResponse) 
         }
         res.status(200).send('OK')
 }
-

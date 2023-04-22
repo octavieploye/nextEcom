@@ -39,10 +39,10 @@ export default async function Dashboard() {
                     <div key={order.id}    className="rounded-lg p-8 my-12">
                         <h2>Order reference: {order.id}</h2>
                         <p>Time: {new Date(order.createDate).toLocaleDateString('en-GB')}</p>
-                        <p>Status: <span className={`${order.status === 'pending' ? 'bg-sky-700' : 'bg-amber-700'}
+                        <p>Status: <span className={`${order.status === 'complete' ? 'bg-sky-700' : 'bg-amber-700'}
                          text-white py-1 rounded-md px-2 mx-2 text sm`}
                         >  
-                            {order.status === 'pending' ? 'Complete' : 'Processing'}
+                            {order.status}
                             </span>
                         </p>
                         <p className="font-medium">Total: {formatPrice(order.amount)}</p>

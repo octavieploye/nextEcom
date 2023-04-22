@@ -7,9 +7,11 @@ import { useCartStore } from "@/store"
 
 
 
+
 export default function CheckoutForm({
     clientSecret,
 }: {clientSecret: string}) {
+   
 
     const stripe = useStripe()
     const elements = useElements()
@@ -22,6 +24,8 @@ export default function CheckoutForm({
     }, 0)
 
     const formattedPrice = formatPrice(totalPrice)
+   
+    const order_id = cartStore.paymentIntent
 
     /** annotations
      * We pass a useEffect to check if everything is mounted  correctly
@@ -69,6 +73,8 @@ useEffect(() => {
                     //Here we will have a "Success" component
                                 cartStore.setCheckout("success")
                                 console.log('Payment Successful')
+                                // We need to update the order status to "paid" in the database
+                             
                             }
                             setIsLoading(false)
                         })

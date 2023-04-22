@@ -522,3 +522,8 @@ const stripePromise = loadStripe(process.env.NEXT_STRIPE_PUBLISHABLE_KEY!)
 
 -->  Then we create the export function called Checkout using useState and useEffect to fetch the ("api/create-Payment-intent' api with method ‘POST’ and passing the body as JSON stringify of the items from the cartStore and the payment_intent_id
 
+
+XIX. WEBHOOKS LOCAL LISTENER 
+
+RUN THE COMMAND:
+stripe listen --forward-to localhost:3000/api/webhooks
