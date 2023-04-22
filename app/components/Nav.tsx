@@ -72,10 +72,11 @@ export default function Nav({user} : Session) {
 }
         {/* {Here we are checking if the user is signed in} */}
         {user && (
-            // We need to add a <div> or Fragment <> here because we can't return two elements in next
-            <div className="flex gap-2">
+            //Allow user to access thier dashboard from their profile picture
+            <Link href={"/dashboard"}>
                       
-                <li className="inline-block py-2 p-2"> <Image src={user?.image as string } width={36} height={36} alt={user.name as string} className="rounded-full "/></li>
+                <li className="inline-block py-2 p-2"> 
+                <Image src={user?.image as string } width={36} height={36} alt={user.name as string} className="rounded-full "/></li>
                 <li >
                     <button onClick={() => signOut()} 
                     className=" ml-4
@@ -86,7 +87,7 @@ export default function Nav({user} : Session) {
                     bg-blue-800 rounded-lg focus:shadow-outline 
                     hover:bg-pink-500">Sign Out</button>
                 </li>
-            </div>
+            </Link>
             )}
     </ul>
     <AnimatePresence>{cartStore.isOpen && <Cart />}</AnimatePresence>

@@ -36,19 +36,18 @@ export default async function Dashboard() {
             {orders.length === 0 ? <p>You have no orders 🥹</p> : <h1 className="font-bold" > Your Orders</h1>}
             <div className=" font-light">
                 {orders.map((order) => (
-                    <div key={order.id}    className="rounded-lg p-8 my-12">
-                        <h2>Order reference: {order.id}</h2>
-                        <p>Time: {new Date(order.createDate).toLocaleDateString('en-GB')}</p>
-                        <p>Status: <span className={`${order.status === 'complete' ? 'bg-sky-700' : 'bg-amber-700'}
+                    <div key={order.id}    className="rounded-lg p-8 my-4 space-y-2">
+                        <h2 className="text-xs font-medium">Order reference: {order.id}</h2>
+                        <p className="text-xs">Status: <span className={`${order.status === 'complete' ? 'bg-sky-700' : 'bg-slate-500'}
                          text-white py-1 rounded-md px-2 mx-2 text sm`}
-                        >  
+                         >  
                             {order.status}
                             </span>
                         </p>
-                        <p className="font-medium">Total: {formatPrice(order.amount)}</p>
-                        <div className="flex gap-8 flex-col">
+                         <p className="text-xs">Order Date: {new Date(order.createDate).toLocaleDateString('en-GB')}</p>
+                        <div className="text-sm lg:flex items-center gap-2">
                             {order.products.map((product) => (
-                                <div className="py-2" key={product.id}>
+                                <div className="py-2 " key={product.id}>
                                     <h2 className="py-2" key={product.name}></h2>
                                     <div className="flex items-center gap-4">
                                         <Image 
@@ -63,7 +62,8 @@ export default async function Dashboard() {
                                 
                                 </div>
                                 
-                            ))}
+                                ))}
+                                <p className="font-medium">Total: {formatPrice(order.amount)}</p>
                            </div> 
                     </div>
                 ))}
