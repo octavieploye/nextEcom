@@ -9,10 +9,13 @@ module.exports = {
   theme: {
     extend: {
       gridTemplateColumns: {
-        fluid: "repeat(auto-fill, minmax(12rem, 1fr))",
+        fluid: "repeat(auto-fill, minmax(20rem, 1fr))",
     },
   },
 
   },
-  plugins: [],
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: ['winter', 'night'],
+  },
 }

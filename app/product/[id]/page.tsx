@@ -17,7 +17,7 @@ export default async function Product ({searchParams} : SearchParamsType) {
                 alt={searchParams.name}  
                 // className="w-full"
              /> 
-            <div className="font-medium text-gray-500">
+            <div className="font-medium ">
 
                 <h1 className="text-2x1  py-2 ">{searchParams.name}</h1>
                     <h2 className="py-2">{searchParams.description}</h2>
@@ -25,7 +25,7 @@ export default async function Product ({searchParams} : SearchParamsType) {
                     <p>{searchParams.features}</p>
 
                     <div className=" flex gap-2">
-                            <p className="font-bold text-sm decoration-from-font text-blue-700 ">
+                            <p className="font-bold text-sm decoration-from-font text-primary ">
                             {searchParams.unit_amount && formatPrice(searchParams.unit_amount)}</p>
                     </div>
                     {/* Here we replaced the AddCart button by the function AddCart() we created in theAddCart.ysx file */}

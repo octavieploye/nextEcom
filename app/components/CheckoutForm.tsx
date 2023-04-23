@@ -83,12 +83,12 @@ useEffect(() => {
     return (
         // CHECKOUT FORM
 
-        <form className="text-gray-600"  onSubmit={handleSubmit} id='payment-form' >
+        <form   onSubmit={handleSubmit} id='payment-form'>
 
             <PaymentElement id="PaymentElement" options={{layout: 'tabs'}}  />
-            <h1 className="text-sky-800 text-sm font-bold">Total: {formattedPrice} </h1>
+            <h1 className="text-primary-focus text-sm font-bold">Total: {formattedPrice} </h1>
 
-            <button className={`py-2 mt-4 w-full bg-sky-700 text-white rounded-md disabled:opacity-25`}  id='submit' disabled={isLoading || !stripe || !elements}  >
+            <button className={`py-2 mt-4 w-full bg-primary text-white rounded-md disabled:opacity-25`}  id='submit' disabled={isLoading || !stripe || !elements}  >
                   <span>
                     {isLoading ? <span>Processing...👀</span> : <span> Pay Now </span>}
                 </span>

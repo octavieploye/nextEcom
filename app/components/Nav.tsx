@@ -24,9 +24,9 @@ export default function Nav({user} : Session) {
                 <Link href='/'>
                 <h1 className="text-bold h-8 px-4 text-sm text-center flex justify-center py-1
                 transition-colors 
-                bg-blue-800
+                bg-primary-focus
                 on-colors duration-150 
-                hover:bg-pink-500 
+                hover:bg-primary
                 focus:shadow-outline
                 rounded-lg
                 text-white">Home</h1>
@@ -46,7 +46,7 @@ export default function Nav({user} : Session) {
             animate={{ scale: 1}} 
             initial={{scale: 0}} 
             exit={{scale: 0}}
-            className="bg-sky-800  text-white text-sm font-bold w-5 h-5 rounded-full absolute left-4 bottom-4 flex items-center justify-center ">
+            className="bg-primary-focus  text-white text-sm font-bold w-5 h-5 rounded-full absolute left-4 bottom-4 flex items-center justify-center ">
                 {cartStore.cart.length}
             </motion.span>
             )}
@@ -57,11 +57,12 @@ export default function Nav({user} : Session) {
             // We need to add a <div> here because we can't return two elements in next
              
                 <li className="h-8 px-4 text-sm text-center flex justify-center
-                text-pink-100 
+                bg-primary-focus
+                text-white
                 transition-colors 
-                bg-blue-800 rounded-lg focus:shadow-outline 
+                 rounded-lg focus:shadow-outline 
                 on-colors duration-150 
-                hover:bg-pink-500">
+                hover:bg-primary">
                 
                     <button onClick={() => signIn()}>Sign In</button>
                 </li>
@@ -84,8 +85,8 @@ export default function Nav({user} : Session) {
                     text-pink-100 
                     transition-colors 
                     on-colors duration-150 
-                    bg-blue-800 rounded-lg focus:shadow-outline 
-                    hover:bg-pink-500">Sign Out</button>
+                    bg-primary-focus rounded-lg focus:shadow-outline 
+                    hover:bg-primary">Sign Out</button>
                 </li>
             </Link>
             )}

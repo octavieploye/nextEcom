@@ -16,8 +16,8 @@ export default function Product({name, image, description, unit_amount, id, meta
         {/* In order to size the image as the current width  & height are only impacting 
             the resolution, we need to add a className in <image /> & then we change the pic size */}
             <Image src={image} width={800} height={800} alt={name}  className='object-cover w-160 h-70 rounded-lg'  />
-            <p className='font-medium py-0.5 text-gray-700'>Titre  : {name}</p>
-            <p className='text-sm decoration-from-font text-blue-700 '>Prix : {unit_amount && formatPrice(unit_amount as number)}</p>
+            <p className='font-medium py-0.5'>Titre  : {name}</p>
+            <p className='text-sm decoration-from-font text-primary-focus'>Prix : {unit_amount && formatPrice(unit_amount as number)}</p>
             
 </div>
 

@@ -6,6 +6,8 @@ import { useCartStore } from "@/store"
 import { useState,useEffect } from "react"
 import { useRouter } from "next/navigation"
 import  CheckoutForm  from "./CheckoutForm"
+import OrderAnimation from "./OrderAnimation"
+import { motion } from "framer-motion"
 
 // NEXT_PUBLIC TO STRIPE_PUBLISHABLE_KEY because we are using the env variable in the front-end(client-side)
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!)
@@ -68,13 +70,16 @@ export default function Checkout() {
         }
     return (
         <div>
+            {/* adding animation while loading Stripe Elements */}
+            {/* If there is not yet a clientSecret run the animation while it loads */}
+            {!clientSecret && <OrderAnimation />}
             {clientSecret && (
-                <div>
+                <motion.div initial={{opacity: 0}} animate={{opacity: 1.5}}>
 {/*  We can check stripe docs elements in Google */}
                     <Elements options={options} stripe={stripePromise}>
                         <CheckoutForm clientSecret={clientSecret}  />
                     </Elements>
-                </div>
+                </motion.div>
             )}
         </div>
     )

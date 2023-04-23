@@ -36,9 +36,9 @@ export default async function Dashboard() {
             {orders.length === 0 ? <p>You have no orders 🥹</p> : <h1 className="font-bold" > Your Orders</h1>}
             <div className=" font-light">
                 {orders.map((order) => (
-                    <div key={order.id}    className="rounded-lg p-8 my-4 space-y-2">
+                    <div key={order.id}    className="rounded-lg p-8 my-4 space-y-2 bg-base-200">
                         <h2 className="text-xs font-medium">Order reference: {order.id}</h2>
-                        <p className="text-xs">Status: <span className={`${order.status === 'complete' ? 'bg-sky-700' : 'bg-slate-500'}
+                        <p className="text-xs">Status: <span className={`${order.status === 'complete' ? 'bg-primary-focus' : 'bg-neutral-focus'}
                          text-white py-1 rounded-md px-2 mx-2 text sm`}
                          >  
                             {order.status}
@@ -63,7 +63,7 @@ export default async function Dashboard() {
                                 </div>
                                 
                                 ))}
-                                <p className="font-medium">Total: {formatPrice(order.amount)}</p>
+                                <p className="font-medium text-neutral-focus">Total: {formatPrice(order.amount)}</p>
                            </div> 
                     </div>
                 ))}

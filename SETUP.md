@@ -13,6 +13,8 @@ Dependencies:
 - Install Stripe webHook via Stripe CLI -> https://github.com/stripe/stripe-cli OR
   https://stripe.com/docs/stripe-cli
 - Install micro
+- Install Lottie
+- Install daisy UI
 
 ---------------------------------- Commands--------------------------------
 - yarn add node
@@ -29,6 +31,8 @@ Dependencies:
 - yarn add framer-motion
 - yarn add @stripe/react-stripe-js@1.16.5 (line 494)
 - yarn add micro
+- yarn add @lottiesfiles/react-lottie-player@3.5.2
+- yarn add daisyui
 
 =================ERRORS,BUGS & FIXES===========================================
     - FOR NEXT VERSION 13.3 AND ABOVE: 
