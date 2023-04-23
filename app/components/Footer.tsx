@@ -40,7 +40,7 @@ export default function Footer() {
     </div>
     <div className="w-full sm:w-1/3">
       <h3 className="font-bold text-lg mb-2">Newsletter</h3>
-      <p>Subscribe to our newsletter and get updates only once a month!</p>
+      <p>Subscribe to our newsletter and get updates once a month!</p>
       <form className="flex mt-4">
         <input
           type="email"
