@@ -10,6 +10,7 @@ import { AnimatePresence, motion } from "framer-motion"
 import Cart from "./Cart"
 import { useCartStore } from "@/store"
 import { AiFillShopping } from "react-icons/ai"
+import DarkLight from "./DarkLight"
 
 // This is a component that will be used in the layout.tsx file as to fetch the user
 export default function Nav({user} : Session) {
@@ -31,7 +32,7 @@ export default function Nav({user} : Session) {
                 text-white">Home</h1>
                 </Link>
 
-    <ul className=" flex items-center gap-12">
+    <ul className=" flex items-center gap-8">
             
            
         {/* Adding the shoping Icon & Toggle the cart */}
@@ -51,6 +52,9 @@ export default function Nav({user} : Session) {
             )}
             </AnimatePresence>
          </li>
+         {/* DARK MODE */}
+
+         <DarkLight />
         {/* /* {Here we are checking if the user is not signed in}  */}
         {!user && (
             // We need to add a <div> here because we can't return two elements in next

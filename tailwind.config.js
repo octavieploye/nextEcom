@@ -6,14 +6,13 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
  
   ],
-  theme: {
-    extend: {
-      gridTemplateColumns: {
-        fluid: "repeat(auto-fill, minmax(20rem, 1fr))",
-    },
-  },
-
-  },
+      theme: {
+        extend: {
+          gridTemplateColumns: {
+            fluid: "repeat(auto-fill, minmax(20rem, 1fr))"      
+          }
+        }        
+      },
   plugins: [require("daisyui")],
   daisyui: {
     themes: ['winter', 'night'],
