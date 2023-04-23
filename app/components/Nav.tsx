@@ -1,8 +1,7 @@
 'use client'
 
 import { Session } from "next-auth"
-import {signIn} from 'next-auth/react'
-import { signOut } from "next-auth/react"
+import {signIn, signOut} from 'next-auth/react'
 import Image from "next/image"
 import Link from "next/link"
 import { AnimatePresence, motion } from "framer-motion"
@@ -74,21 +73,45 @@ export default function Nav({user} : Session) {
         {/* {Here we are checking if the user is signed in} */}
         {user && (
             //Allow user to access thier dashboard from their profile picture
-            <Link href={"/dashboard"}>
-                      
-                <li className="inline-block py-2 p-2"> 
-                <Image src={user?.image as string } width={36} height={36} alt={user.name as string} className="rounded-full "/></li>
-                <li >
-                    <button onClick={() => signOut()} 
-                    className=" ml-4
-                    h-8 px-2 m-2 text-sm 
-                    text-pink-100 
-                    transition-colors 
-                    on-colors duration-150 
-                    bg-primary-focus rounded-lg focus:shadow-outline 
-                    hover:bg-primary">Sign Out</button>
-                </li>
-            </Link>
+            <li>        
+                 {/*Here we initiate the dropdown to the checkout dashboard and signout  */}
+                <div className="dropdown dropdown-end cursor-pointer">
+                    <Image
+                    src={user?.image as string }
+                    width={36}
+                    height={36}
+                    alt={user.name as string}
+                    className="rounded-full "
+                    tabIndex={0}
+                    />
+                    <ul 
+                    tabIndex={0} 
+                    className="dropdown-content menu p-4 space-y-4 shadow bg-base-100 rounded-box w-72">
+                    <Link 
+                            href="/dashboard" 
+                            // Close the dropdown when the user click on the link
+                            onClick={() => {if (document.activeElement instanceof HTMLElement) {
+                                document.activeElement.blur()
+                            }}}
+                            className="hover:bg-base-300 p-4 rounded-md">
+                        Check Your Orders
+                    </Link>
+                    {/* SignOut */}
+                    <li 
+                        className="hover:bg-base-300 p-4 rounded-md"
+                            onClick={() => {
+                                signOut()
+                                if (document.activeElement instanceof HTMLElement) {
+                                    document.activeElement.blur()
+                            }}}
+                    >
+                        Sign Out
+                    </li>
+                    </ul>
+                </div>
+            </li>
+            
+           
             )}
     </ul>
     <AnimatePresence>{cartStore.isOpen && <Cart />}</AnimatePresence>
