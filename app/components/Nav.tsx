@@ -18,18 +18,15 @@ export default function Nav({user} : Session) {
     const cartStore = useCartStore();
     return (
         <nav className="flex
-         justify-between items-center py-12">
+         justify-between items-center py-6 px-6">
 
                 {/* adding a home button */}
                 <Link href='/'>
-                <h1 className="text-bold h-8 px-4 text-sm text-center flex justify-center py-1
-                transition-colors 
-                bg-primary-focus
-                on-colors duration-150 
-                hover:bg-primary
-                focus:shadow-outline
-                rounded-lg
-                text-white">Home</h1>
+                <button className="btn btn-circle btn-outline btn-primary text-bold px-4 text-sm">
+                    Home
+                </button>
+               
+            
                 </Link>
 
     <ul className=" flex items-center gap-8">
@@ -59,15 +56,12 @@ export default function Nav({user} : Session) {
         {!user && (
             // We need to add a <div> here because we can't return two elements in next
              
-                <li className="h-8 px-4 text-sm text-center flex justify-center
-                bg-primary-focus
-                text-white
-                transition-colors 
-                 rounded-lg focus:shadow-outline 
-                on-colors duration-150 
-                hover:bg-primary">
+                <li >
                 
-                    <button onClick={() => signIn()}>Sign In</button>
+                    <button 
+                    className="btn btn-primary text-sm rounded-lg text-white"
+                    onClick={() => 
+                    signIn()}>Sign In</button>
                 </li>
 
 
@@ -90,7 +84,7 @@ export default function Nav({user} : Session) {
                     />
                     <ul 
                     tabIndex={0} 
-                    className="dropdown-content menu p-4 space-y-4 shadow bg-base-100 rounded-box w-72">
+                    className="dropdown-content menu p-4 space-y-4 shadow bg-base-200 rounded-box w-72">
                     <Link 
                             href="/dashboard" 
                             // Close the dropdown when the user click on the link

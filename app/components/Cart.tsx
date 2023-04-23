@@ -1,3 +1,5 @@
+// * Pop up cart component (z-10 apply to the cart component to make it appear on top of the page)
+
 'use client';
 
 import Image from "next/image";
@@ -28,19 +30,19 @@ export default function Cart() {
                 animate={{opacity:1}}
                 exit={{opacity:0}}
                 onClick={() => cartStore.toggleCart()}  
-                className="fixed w-full h-screen left-0 top-0 bg-black/25">
+                className="fixed z-10 w-full h-screen left-0 top-0 bg-black/25">
 
             {/* Cart */}
             <motion.div
                  layout
                  onClick={(e) =>e.stopPropagation()} 
-                 className="bg-gray-100 absolute right-0 top-0 w-full lg:w-2/5 p-12 overflow-y-scroll text-gray-500">
+                 className="bg-base-300 absolute right-0 top-0 w-full lg:w-2/5 p-12 overflow-y-scroll text-gray-500">
 
                     {cartStore.onCheckout ==='cart' && (
 
                         <button onClick={() => cartStore.toggleCart()} className="text-sm font-bold pb-12"> Back to Store ☑️ </button>
                     )}
-                    {/* Got to your cart page */}
+                    {/* Go to your cart page */}
                     {cartStore.onCheckout ==='checkout' && (
 
                     <button onClick={() => cartStore.setCheckout('cart')} className="text-sm font-bold pb-12"> Check Your Cart 🛒  </button>

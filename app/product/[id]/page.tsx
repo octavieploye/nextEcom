@@ -10,13 +10,13 @@ export default async function Product ({searchParams} : SearchParamsType) {
     return (
         <div>
 
-            <div className="lg:px-50">
+            <div className=" p-10 ">
                 <Image
                     src={searchParams.image}
                     width={500}
                     height={500}
                     alt={searchParams.name}
-                    // className="w-full"
+                    className="rounded-lg shadow-2xl"
                  />
                 <div className="font-medium ">
                     <h1 className="text-2x1  py-2 ">{searchParams.name}</h1>

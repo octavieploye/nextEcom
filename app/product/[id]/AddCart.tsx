@@ -22,7 +22,7 @@ export default function AddCart({unit_amount, id, name, image, quantity} : AddCa
             <button 
             onClick={handleAddToCart} 
             disabled={added}
-            className="my-4 btn btn-primary w-full">
+            className="my-4 btn btn-primary w-auto">
                 {!added && <span> Add To Cart </span>}
                 {added && <span> Adding To Cart </span>}
             </button>
