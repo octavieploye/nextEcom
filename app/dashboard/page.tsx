@@ -47,24 +47,26 @@ export default async function Dashboard() {
                          <p className="text-xs">Order Date: {new Date(order.createDate).toLocaleDateString('en-GB')}</p>
                         <div className="text-sm lg:flex items-center gap-2">
                             {order.products.map((product) => (
-                                <div className="py-2 " key={product.id}>
-                                    <h2 className="py-2" key={product.name}></h2>
-                                    <div className="flex items-center gap-4">
+                                <div className="py-1" key={product.id}>
+                                        <h2 className="py-2 " key={product.name}>{product.name}</h2>
+                                    <div className="flex lg:w-1/2 gap-4">
                                         <Image 
                                         src={product.image!}
-                                        width={36}
-                                        height={36}
+                                        width={120}
+                                        height={120}
                                         alt={product.name}
                                         />
-                                        <p>{formatPrice(product.unit_amount)}</p>
-                                        <p>Quantity:{product.quantity} </p>
+                                        <div className="py-1" >
+                                            <p className="py-1">Quantity:{product.quantity} </p>
+                                            <p className="text-neutral">{formatPrice(product.unit_amount)}</p>
+                                        </div>
                                     </div>
                                 
                                 </div>
                                 
                                 ))}
-                                <p className="font-medium text-neutral-focus">Total: {formatPrice(order.amount)}</p>
                            </div> 
+                            <p className="flex font-bold text-primary-focus">Total: {formatPrice(order.amount)}</p>
                     </div>
                 ))}
             </div>
