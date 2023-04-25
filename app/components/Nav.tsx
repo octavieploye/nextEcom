@@ -17,8 +17,7 @@ export default function Nav({user} : Session) {
     // We set the getter for the Cart component
     const cartStore = useCartStore();
     return (
-        <nav className="flex
-         justify-between items-center py-6 px-6">
+        <nav className="flex justify-between items-center py-6 px-6">
 
                 {/* adding a home button */}
                 <Link href='/'>
@@ -26,11 +25,13 @@ export default function Nav({user} : Session) {
                     Home
                 </button>
                
-            
                 </Link>
 
     <ul className=" flex items-center gap-8">
             
+             <div className="px-10 mx-12 bg-neutral rounded-md ">
+                 <h1 className="text-white"> Welcome To Monkey Bloom </h1>
+             </div>
            
         {/* Adding the shoping Icon & Toggle the cart */}
          <li onClick={() =>cartStore.toggleCart() } className=" flex items-center text-3xl relative cursor-pointer">

@@ -41,12 +41,14 @@ export default function Footer() {
           </a>
       </div>
     </div>
-    <div className="w-full sm:w-1/3">
-      <h3 className="font-bold text-lg mb-2">Contact Us</h3>
-      <p>3 Rue des tournesols</p>
-      <p>Superville, 45700 - France</p>
-      <p>contact@monkeybloom.com</p>
-    </div>
+    
+        <div className=" w-full sm:w-1/3">
+          <h3 className="font-bold text-lg mb-2">Contact Us</h3>
+          <p>3 Rue des tournesols</p>
+          <p>Superville, 45700 - France</p>
+          <p>contact@monkeybloom.com</p>
+        </div>
+
     <div className="w-full sm:w-1/3">
       <h3 className="font-bold text-lg mb-2">Newsletter</h3>
       <p>Subscribe to our newsletter and get updates once a month!</p>
