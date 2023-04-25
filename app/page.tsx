@@ -38,7 +38,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, { apiVersion:
               
               //  we use here the tailwind css grid we set in the tailwind.config file 
               // to render the products in a grid layout
-              <main className="grid grid-cols-fluid gap-12 p-10 mx-10 bg-base-300 rounded-lg" >
+              <main className="grid grid-cols-fluid gap-12 p-10 mx-10" >
                           {/* <h1 className="text-4xl p-2" >Hello from next ecommerce web app. Here is my product List:  🚀</h1> */}
                           
                                   {products.map((product) => (

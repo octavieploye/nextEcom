@@ -12,7 +12,7 @@ export default function Footer() {
 
   return (
     <footer  
-    className='bg-base-300 lg:fixed md:relative sm:relative bottom-0 w-full text-info-focus py-4 '>
+    className='bg-neutral lg:fixed md:relative sm:relative bottom-0 w-full text-info-focus py-4 '>
       <div className="container mx-auto flex flex-wrap justify-between">
         <div className="w-full sm:w-1/3">
           <h3 className="font-bold text-lg mb-2">Follow us</h3>
