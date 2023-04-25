@@ -1,9 +1,18 @@
+'use client'
 import React from 'react';
 import Link from 'next/link';
+import { useState, useEffect, useRef } from 'react';
 
 export default function Footer() {
+
+// i want to create a function that will check if the user has scrolled to the bottom of the page
+// if the user has scrolled to the bottom of the page, the footer will show
+// if the user has not scrolled to the bottom of the page, the footer will not show
+
+
   return (
-    <footer className="bg-base-300 absolute bottom-0 w-full text-info-focus p-4 ">
+    <footer  
+    className='bg-base-300 lg:fixed md:relative sm:relative bottom-0 w-full text-info-focus py-4 '>
       <div className="container mx-auto flex flex-wrap justify-between">
         <div className="w-full sm:w-1/3">
           <h3 className="font-bold text-lg mb-2">Follow us</h3>
@@ -11,9 +20,9 @@ export default function Footer() {
             <a href="#" className="mr-4">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
+                width="48"
+                height="48"
+                viewBox="0 0 48 48"
                 fill="currentColor"
               >
                 <path d="M12 0a12 12 0 0 0-3.807 23.272v-6.707h-2.83v-2.829h2.83v-1.815c0-2.785 1.693-4.303 4.183-4.303a17.315 17.315 0 0 1 2.042.104v2.893l-1.398.001c-1.1 0-1.315.524-1.315 1.29v1.693h2.63l-.344 2.83h-2.285v6.707a12.007 12.007 0 0 0 6.686-11.01c0-6.378-4.603-11.642-10.677-12.807l-.908-.147z" />
@@ -34,8 +43,8 @@ export default function Footer() {
     </div>
     <div className="w-full sm:w-1/3">
       <h3 className="font-bold text-lg mb-2">Contact Us</h3>
-      <p>3 Rue de ton site.</p>
-      <p>Taville, 45700. France</p>
+      <p>3 Rue des tournesols</p>
+      <p>Superville, 45700 - France</p>
       <p>contact@monkeybloom.com</p>
     </div>
     <div className="w-full sm:w-1/3">
@@ -56,14 +65,14 @@ export default function Footer() {
   <div className="container mx-auto mt-4 flex flex-wrap justify-between">
     <div className="w-full sm:w-1/2">
       <Link href="/privacy">
-        <p className="text-gray-500 hover:text-gray-300">
+        <p className="text-gray-500 hover:text-gray-800">
           Privacy Policy
         </p>
       </Link>
     </div>
     <div className="w-full sm:w-1/2 text-right">
     <Link href="/terms">
-<p className="text-gray-500 hover:text-gray-300">Terms and Conditions</p>
+<p className="text-gray-500 hover:text-gray-800">Terms and Conditions</p>
 </Link>
 </div>
 </div>
