@@ -3,6 +3,8 @@ import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { PrismaClient } from "@prisma/client";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
+import Link from "next/link";
+import { useCartStore } from "@/store";
 
 
 // Revalidates every time a uservisit the page
@@ -25,6 +27,7 @@ const fetchOrders =async() => {
 // Check your order page
 export default async function Dashboard() {
     const orders = await fetchOrders();
+    
  
     // Conditional rendering is needed as an order can be null
     if(orders === null){
@@ -67,6 +70,7 @@ export default async function Dashboard() {
                                 ))}
                            </div> 
                             <p className="flex font-bold text-primary-focus">Total: {formatPrice(order.amount)}</p>
+                            {/* TODO add a  ' I'm Ready! Bring me to the checkout page' button */}
                     </div>
                 ))}
             </div>
