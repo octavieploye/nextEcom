@@ -17,6 +17,7 @@ export default async function Product ({searchParams} : SearchParamsType) {
                     height={500}
                     alt={searchParams.name}
                     className="rounded-lg shadow-2xl"
+                    priority={true}
                  />
                 <div className="font-medium ">
                     <h1 className="text-2x1  py-2 ">{searchParams.name}</h1>

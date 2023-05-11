@@ -10,6 +10,7 @@ export default function AddCart({unit_amount, id, name, image, quantity} : AddCa
     const [added, setAdded] = useState(false)
 
     const handleAddToCart = () => {
+        
         cartStore.addProduct({id, image, unit_amount, quantity, name})
         setAdded(true)
         setTimeout(() => {
@@ -23,8 +24,12 @@ export default function AddCart({unit_amount, id, name, image, quantity} : AddCa
             onClick={handleAddToCart} 
             disabled={added}
             className="my-4 btn btn-primary w-auto">
-                {!added && <span> Add To Cart </span>}
-                {added && <span> Adding To Cart </span>}
+               
+                    
+                        {!added && <span> Add To Cart </span>}
+                        {added && <span> Adding To Cart </span>}
+                   
+               
             </button>
             </>
         )

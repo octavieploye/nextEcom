@@ -3,13 +3,11 @@ import Stripe from "stripe";
 import { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth";
 import { AddCartType } from '@/type/AddCartType';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from "@/Utility/prisma"
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
     apiVersion:"2022-11-15"
 })
-
-const prisma = new PrismaClient();
 
 // CALCULATE THE ORDER AMOUNT
 //  ACC = ACCUMULATOR
