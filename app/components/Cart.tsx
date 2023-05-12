@@ -52,12 +52,14 @@ export default function Cart() {
                     <>
                 {cartStore.cart.map((item) => (
                     <motion.div layout key={item.id}   className="flex py-4 gap-4">
+                        {/* ADDED PRIORITY={TRUE} AND W-AUTO FOR IMAGE SRC WARNING */}
                         <Image
                             src={item.image}
                             alt={item.name}
                             width={120}
                             height={120}
-                            className="rounded-md h-24"
+                            className="rounded-md w-auto h-auto"
+                            priority={true}
                        />
 
                         <motion.div layout>

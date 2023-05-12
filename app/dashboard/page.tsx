@@ -1,3 +1,5 @@
+// * This is the page that displays the user's orders**
+
 import formatPrice from "@/Utility/PriceFormat";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { prisma } from "@/Utility/prisma"
@@ -7,18 +9,27 @@ import Link from "next/link";
 import { useCartStore } from "@/store";
 
 
+
 // Revalidates every time a uservisit the page
 export const revalidate = 0;
 
+// User interface declaration
+interface User {
+    id: string;
+    name?: string | null | undefined;
+    email?: string | null | undefined;
+    image?: string | null | undefined;
+  }
 const fetchOrders =async() => {
 
-    const user = await getServerSession(authOptions);
+        // Get the user's session
+    const user: User | null= await getServerSession(authOptions);
     if(!user){
         return null
     }
-
-        const orders = await prisma.order.findMany({
-            where: {userId: user?.user?.id},
+//  Get the user's orders
+         const orders = await prisma.order.findMany({
+            where: {userId: user?.id},
             include: {products:true},
             orderBy: {createDate: 'desc'},
             })

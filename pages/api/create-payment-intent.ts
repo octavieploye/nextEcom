@@ -1,3 +1,5 @@
+// * This file is used to create the payment intent
+
 import { authOptions} from "./auth/[...nextauth]"
 import Stripe from "stripe";
 import { NextApiRequest, NextApiResponse } from "next";
@@ -18,9 +20,25 @@ const calculateOrderAmount = (items: AddCartType[]) => {
     return totalPrice;
 }
 
+//  Item type is used to fix the type error from Typescript
+interface Item {
+    name: string;
+    description?: string | null;
+    unit_amount: string;
+    image?: string | null;
+    quantity: number;
+  }
+
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     // GET THE USER - Check if the user is logged in - If not return to the loggin page
-    const userSession = await getServerSession(req, res, authOptions);
+
+    // The userSesion code fixes the type error from Typescript allowing null and undefined
+    const userSession: {
+        user: {
+            id: string | undefined;
+        } | null | undefined;
+    } |null = await getServerSession(req, res, authOptions);
           if(!userSession) {
               res.status(403).json({message: "You are not logged in"})
               return;
@@ -34,7 +52,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
      * 5. payment_intent_id = empty pairs of Strings initially
      */
     const {items, payment_intent_id} = req.body;
-    console.log(items, payment_intent_id)
+    // console.log(items, payment_intent_id)
 
     // CREATE THE ORDER DATA 
 
@@ -43,15 +61,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         amount: calculateOrderAmount(items),
         currency:"eur",
 
-        /** // We set the status to pending because we want to create the payment intent first  
-         * and then we will update the status to paid
+        /** We set the status to pending because we want to create the payment intent first  
+         * and then we will update the status to paid/completed
         * Also IT WILL STORE THE ORDER DATA IN THE DATABASE - CAN BE USED FOR ORDER ANALYSIS
         * IT WILL UPDATE THE DATA WHEN THE ORDER IS PAID, FAILED, CANCELLED, REFUNDED, REQUIRE-ACTION...ETC
         */
          status:'pending',
          paymentIntentID: payment_intent_id,
          products: {
-            create: items.map((item) => ({
+            create: items.map((item: Item) => ({
                 name: item.name,
                 description: item.description || null,
                 // parseFloat to make sure it is not converted to a string
@@ -92,7 +110,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                         amount: calculateOrderAmount(items),
                         products: {
                         deleteMany: {},
-                        create: items.map((item) => ({
+                        create: items.map((item: Item) => ({
                             name: item.name,
                             description: item.description || null,
                             unit_amount: parseFloat(item.unit_amount),

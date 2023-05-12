@@ -1,10 +1,12 @@
 'use client'
 
+// * THIS IS THE NAV COMPONENT
 import { Session } from "next-auth"
 import {signIn, signOut} from 'next-auth/react'
 import Image from "next/image"
 import Link from "next/link"
 import { AnimatePresence, motion } from "framer-motion"
+import { useState, useEffect } from "react"
 
 // We set the getter for the Cart component
 import Cart from "./Cart"
@@ -16,6 +18,12 @@ import DarkLight from "./DarkLight"
 export default function Nav({user} : Session) {
     // We set the getter for the Cart component
     const cartStore = useCartStore();
+    // Hydration for mounted/unmounted component cart
+    const [isMounted, setIsMounted] = useState(false)
+
+    useEffect(() => {
+        setIsMounted(true)
+    }, [])
     return (
         <nav className="flex justify-between items-center py-6 px-6">
 
@@ -113,7 +121,8 @@ export default function Nav({user} : Session) {
            
             )}
     </ul>
-    <AnimatePresence>{cartStore.isOpen && <Cart />}</AnimatePresence>
+    {/* animate once the cart is mounted and opened */}
+    <AnimatePresence>{isMounted && cartStore.isOpen && <Cart />}</AnimatePresence>
 </nav>
     )
 }

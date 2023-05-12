@@ -1,5 +1,6 @@
 'use client'
 
+// * THIS IS THE ADD TO CART BUTTON COMPONENT
 import { useCartStore } from "@/store"
 import { AddCartType } from "@/type/AddCartType"
 import { useState } from "react"
@@ -10,7 +11,6 @@ export default function AddCart({unit_amount, id, name, image, quantity} : AddCa
     const [added, setAdded] = useState(false)
 
     const handleAddToCart = () => {
-        
         cartStore.addProduct({id, image, unit_amount, quantity, name})
         setAdded(true)
         setTimeout(() => {
@@ -19,7 +19,8 @@ export default function AddCart({unit_amount, id, name, image, quantity} : AddCa
     }
 
         return (
-            <>
+        // ADD TO CART BUTTON
+            <div>
             <button 
             onClick={handleAddToCart} 
             disabled={added}
@@ -28,9 +29,11 @@ export default function AddCart({unit_amount, id, name, image, quantity} : AddCa
                     
                         {!added && <span> Add To Cart </span>}
                         {added && <span> Adding To Cart </span>}
+                        
                    
                
             </button>
-            </>
+            </div>
+            
         )
 }
